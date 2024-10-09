@@ -1,23 +1,32 @@
 <% layout('layouts/boilerplate') %>
 
-<div class="row">
-    <div class="col-6 offset-3">
-        <div class="card mb-3" >
-            <img src="<%= campground.image %>" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title"><%= campground.title %></h5>
-              <p class="card-text"><%= campground.description %></p>
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2">
+            <div class="card shadow-sm">
+                <!-- Card Image -->
+                <img src="<%= campground.image %>" class="card-img-top" alt="<%= campground.title %>" style="max-height: 400px; object-fit: cover;">
+
+                <!-- Card Body -->
+                <div class="card-body">
+                    <h5 class="card-title text-center"><%= campground.title %></h5>
+                    <p class="card-text"><%= campground.description %></p>
+                </div>
+
+                <!-- List Group for Price and Location -->
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item text-muted"><i class="fas fa-map-marker-alt"></i> <%= campground.location %></li>
+                    <li class="list-group-item"><i class="fas fa-dollar-sign"></i> $<%= campground.price %> / night</li>
+                </ul>
+
+                <!-- Edit and Delete Buttons -->
+                <div class="card-body text-center">
+                    <a class="btn btn-info mx-2" href="/campgrounds/<%= campground._id %>/edit">Edit</a>
+                    <form class="d-inline" action="/campgrounds/<%= campground._id %>?_method=DELETE" method="post">
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
             </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item text-muted"><%= campground.location %></li>
-              <li class="list-group-item">$<%= campground.price %>/night</li>
-            </ul>
-            <div class="card-body">
-                <a class="card-link btn btn-info"  href="/campgrounds/<%= campground._id %>/edit">edit</a>
-                <form class="d-inline" action="/campgrounds/<%= campground._id %>?_method=DELETE" method="post">
-                    <button class="btn btn-danger">delete</button>
-                </form>
-            </div>
-          </div>
+        </div>
     </div>
 </div>

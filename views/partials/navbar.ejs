@@ -1,13 +1,22 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Yelcamp</a>
+      <a class="navbar-brand fw-bold fs-4" href="#">Yelcamp</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <a class="nav-link"  href="/">Home</a>
-          <a class="nav-link" href="/campgrounds">Campgrounds</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="campgroundDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Campgrounds
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="campgroundDropdown">
+              <li><a class="dropdown-item" href="/campgrounds">All Campgrounds</a></li>
+              <li><a class="dropdown-item" href="/campgrounds/new">New Campground</a></li>
+            </ul>
+          </li>
+          
           <a class="nav-link" href="/campgrounds/new">New Campground</a>
         </div>
       </div>

@@ -8,7 +8,6 @@ const ejsMate = require('ejs-mate');
 const catchAsync = require('./utils/catchAsync');
 const ExpressError = require('./utils/ExpressError');
 const {campgroundSchema} = require('./schemas');
-const campground = require('./models/campground');
 
 
 app.set("view engine", "ejs");
@@ -60,7 +59,7 @@ app.post('/campgrounds', validateCampground, catchAsync(async (req, res) => {
 
   const campground = new Campground(req.body.campground);
   await campground.save();
-  res.redirect('/campgrounds');
+  res.redirect(`/campgrounds/${campground._id}`);
 }));
 
 
