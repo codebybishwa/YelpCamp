@@ -1,5 +1,6 @@
 const Joi = require('joi');
 
+// This is not a mongoose schema. It's going to validate our data before involving mongoose.
 module.exports.campgroundSchema = Joi.object({
     campground: Joi.object({
       title: Joi.string().required(),

@@ -8,6 +8,7 @@ const ejsMate = require('ejs-mate');
 const catchAsync = require('./utils/catchAsync');
 const ExpressError = require('./utils/ExpressError');
 const {campgroundSchema} = require('./schemas');
+const { title } = require('process');
 
 
 app.set("view engine", "ejs");
@@ -55,7 +56,7 @@ app.get('/campgrounds/new', (req, res) => {
 
 
 app.post('/campgrounds', validateCampground, catchAsync(async (req, res) => {
-  if(!req.body.campground) throw new ExpressError("Invalid Campground Data", 400);
+  // if(!req.body.campground) throw new ExpressError("Invalid Campground Data", 400);
 
   const campground = new Campground(req.body.campground);
   await campground.save();
@@ -114,16 +115,18 @@ app.delete('/campgrounds/:id', catchAsync(
 ));
 
 
+// if we don't find amy page then we will throw this error
 app.all("*", (req, res, next) => {
   next(new ExpressError('Page not found!!', 404));
 })
 
 
+// This is crucial. It's the error handling middleware
 app.use((err, req, res, next) => {
   const {statusCode = 500} = err;
   if(!err.message) err.message = "Something went wrong";
 
-  res.status(statusCode).render('error', {err});
+  res.status(statusCode).render('error', {err});  // rendering my error template (error.ejs)
 })
 
 
