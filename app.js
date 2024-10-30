@@ -7,8 +7,9 @@ const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
 const catchAsync = require('./utils/catchAsync');
 const ExpressError = require('./utils/ExpressError');
-const {campgroundSchema} = require('./schemas');
+const {campgroundSchema, reviewSchema} = require('./schemas');
 const { title } = require('process');
+const Review = require('./models/review')
 
 
 app.set("view engine", "ejs");
@@ -36,6 +37,17 @@ const validateCampground = (req, res, next) => {
   else {
     next();
   }
+}
+
+const validateReview = (req, res, next) => {
+  const {error} = reviewSchema.validate(req.body);
+  if(error) {
+    const msg = error.details.map(element => element.message).join(',');
+    throw new ExpressError(msg, 400);
+ }
+ else {
+   next();
+ }
 }
 
 
@@ -113,6 +125,19 @@ app.delete('/campgrounds/:id', catchAsync(
     res.redirect('/campgrounds');
   }
 ));
+
+app.post('/campgrounds/:id/reviews', validateReview, catchAsync(
+  async (req, res) => {
+    const { id } = req.params;
+    const campground = await Campground.findById(id);
+    const review = new Review(req.body.review);
+    campground.reviews.push(review);
+    await review.save();
+    await campground.save();
+
+    res.redirect(`/campgrounds/${campground._id}`);
+  }
+))
 
 
 // if we don't find amy page then we will throw this error

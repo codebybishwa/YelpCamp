@@ -27,6 +27,46 @@
                     </form>
                 </div>
             </div>
+
+            <!-- Dropdown Button for Review Form -->
+            <div class="mt-4">
+                <button class="btn btn-outline-primary w-100" type="button" data-bs-toggle="collapse" data-bs-target="#reviewForm" aria-expanded="false" aria-controls="reviewForm">
+                    Add a Review
+                </button>
+
+                <!-- Collapsible Review Form -->
+                <div class="collapse mt-3" id="reviewForm">
+                    <div class="card card-body">
+                        <h5 class="card-title text-center">Share Your Experience</h5>
+                        <form action="/campgrounds/<%= campground._id %>/reviews" novalidate class="needs-validation"  method="post"> 
+                            <!-- Rating Input -->
+                            <div class="mb-3">
+                                <label for="rating" class="form-label">Rating (1 to 5):</label>
+                                <select class="form-select" id="rating" name="review[rating]" required>
+                                    <option value="" selected disabled>Choose...</option>
+                                    <option value="1">1 - Poor</option>
+                                    <option value="2">2 - Fair</option>
+                                    <option value="3">3 - Good</option>
+                                    <option value="4">4 - Very Good</option>
+                                    <option value="5">5 - Excellent</option>
+                                </select>
+                            </div>
+
+                            <!-- Review Text Input -->
+                            <div class="mb-3">
+                                <label for="body" class="form-label">Review:</label>
+                                <textarea class="form-control" id="body" name="review[body]" rows="3" placeholder="Share your experience..." required></textarea>
+                                <div class="valid-feedback">Looks good!</div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Submit Review</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
