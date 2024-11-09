@@ -81,7 +81,7 @@ app.get('/campgrounds/:id', catchAsync(async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send('Invalid ID format');
   }
-  const campground = await Campground.findById(id);
+  const campground = await Campground.findById(id).populate('reviews');
   if (!campground) {
     return res.status(404).send('Campground not found');
   }
@@ -138,6 +138,18 @@ app.post('/campgrounds/:id/reviews', validateReview, catchAsync(
     res.redirect(`/campgrounds/${campground._id}`);
   }
 ))
+
+// Our campground contains an array of object ids of reviews. We want to delete the id which corresponds to our deleted review
+app.delete('/campgrounds/:id/reviews/:reviewId', catchAsync(
+  async (req, res) => {
+    const {id, reviewId} = req.params;
+    await Campground.findByIdAndUpdate(id, {$pull: {reviews: reviewId}});
+    await Campground.findByIdAndDelete(reviewId);
+
+    res.redirect(`/campgrounds/${id}`);
+  }
+))
+
 
 
 // if we don't find amy page then we will throw this error

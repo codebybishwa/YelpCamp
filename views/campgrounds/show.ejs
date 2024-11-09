@@ -1,72 +1,130 @@
 <% layout('layouts/boilerplate') %>
 
-<div class="container my-5">
-    <div class="row">
-        <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2">
-            <div class="card shadow-sm">
-                <!-- Card Image -->
-                <img src="<%= campground.image %>" class="card-img-top" alt="<%= campground.title %>" style="max-height: 400px; object-fit: cover;">
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2">
+                <div class="card shadow-sm">
+                    <!-- Card Image -->
+                    <img src="<%= campground.image %>" class="card-img-top" alt="<%= campground.title %>"
+                        style="max-height: 400px; object-fit: cover;">
 
-                <!-- Card Body -->
-                <div class="card-body">
-                    <h5 class="card-title text-center"><%= campground.title %></h5>
-                    <p class="card-text"><%= campground.description %></p>
-                </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <h5 class="card-title text-center">
+                            <%= campground.title %>
+                        </h5>
+                        <p class="card-text">
+                            <%= campground.description %>
+                        </p>
+                    </div>
 
-                <!-- List Group for Price and Location -->
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item text-muted"><i class="fas fa-map-marker-alt"></i> <%= campground.location %></li>
-                    <li class="list-group-item"><i class="fas fa-dollar-sign"></i> $<%= campground.price %> / night</li>
-                </ul>
+                    <!-- List Group for Price and Location -->
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item text-muted"><i class="fas fa-map-marker-alt"></i>
+                            <%= campground.location %>
+                        </li>
+                        <li class="list-group-item"><i class="fas fa-dollar-sign"></i> $<%= campground.price %> / night
+                        </li>
+                    </ul>
 
-                <!-- Edit and Delete Buttons -->
-                <div class="card-body text-center">
-                    <a class="btn btn-info mx-2" href="/campgrounds/<%= campground._id %>/edit">Edit</a>
-                    <form class="d-inline" action="/campgrounds/<%= campground._id %>?_method=DELETE" method="post">
-                        <button class="btn btn-danger">Delete</button>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Dropdown Button for Review Form -->
-            <div class="mt-4">
-                <button class="btn btn-outline-primary w-100" type="button" data-bs-toggle="collapse" data-bs-target="#reviewForm" aria-expanded="false" aria-controls="reviewForm">
-                    Add a Review
-                </button>
-
-                <!-- Collapsible Review Form -->
-                <div class="collapse mt-3" id="reviewForm">
-                    <div class="card card-body">
-                        <h5 class="card-title text-center">Share Your Experience</h5>
-                        <form action="/campgrounds/<%= campground._id %>/reviews" novalidate class="needs-validation"  method="post"> 
-                            <!-- Rating Input -->
-                            <div class="mb-3">
-                                <label for="rating" class="form-label">Rating (1 to 5):</label>
-                                <select class="form-select" id="rating" name="review[rating]" required>
-                                    <option value="" selected disabled>Choose...</option>
-                                    <option value="1">1 - Poor</option>
-                                    <option value="2">2 - Fair</option>
-                                    <option value="3">3 - Good</option>
-                                    <option value="4">4 - Very Good</option>
-                                    <option value="5">5 - Excellent</option>
-                                </select>
-                            </div>
-
-                            <!-- Review Text Input -->
-                            <div class="mb-3">
-                                <label for="body" class="form-label">Review:</label>
-                                <textarea class="form-control" id="body" name="review[body]" rows="3" placeholder="Share your experience..." required></textarea>
-                                <div class="valid-feedback">Looks good!</div>
-                            </div>
-
-                            <!-- Submit Button -->
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-primary">Submit Review</button>
-                            </div>
+                    <!-- Edit and Delete Buttons -->
+                    <div class="card-body text-center">
+                        <a class="btn btn-info mx-2" href="/campgrounds/<%= campground._id %>/edit">Edit</a>
+                        <form class="d-inline" action="/campgrounds/<%= campground._id %>?_method=DELETE" method="post">
+                            <button class="btn btn-danger">Delete</button>
                         </form>
                     </div>
                 </div>
+
+                <!-- Dropdown Button for Review Form -->
+                <div class="mt-4">
+                    <button class="btn btn-outline-primary w-100" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#reviewForm" aria-expanded="false" aria-controls="reviewForm">
+                        Add a Review
+                    </button>
+
+                    <!-- Collapsible Review Form -->
+                    <div class="collapse mt-3" id="reviewForm">
+                        <div class="card card-body">
+                            <h5 class="card-title text-center">Share Your Experience</h5>
+                            <form action="/campgrounds/<%= campground._id %>/reviews" novalidate
+                                class="needs-validation" method="post">
+                                <!-- Rating Input -->
+                                <div class="mb-3">
+                                    <label for="rating" class="form-label">Rating (1 to 5):</label>
+                                    <select class="form-select" id="rating" name="review[rating]" required>
+                                        <option value="" selected disabled>Choose...</option>
+                                        <option value="1">1 - Poor</option>
+                                        <option value="2">2 - Fair</option>
+                                        <option value="3">3 - Good</option>
+                                        <option value="4">4 - Very Good</option>
+                                        <option value="5">5 - Excellent</option>
+                                    </select>
+                                </div>
+
+                                <!-- Review Text Input -->
+                                <div class="mb-3">
+                                    <label for="body" class="form-label">Review:</label>
+                                    <textarea class="form-control" id="body" name="review[body]" rows="3"
+                                        placeholder="Share your experience..." required></textarea>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+
+                                <!-- Submit Button -->
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary">Submit Review</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reviews Section -->
+                <hr class="my-4">
+                <h4 class="text-center mb-4" style="position: relative;">
+                    <span style="display: inline-block; padding: 0 15px; background: white;">User Reviews</span>
+                </h4>
+
+                <div class="mt-3">
+                    <% if (campground.reviews.length===0) { %>
+                        <p class="text-center text-muted">No reviews yet. Be the first to add one!</p>
+                        <% } else { %>
+                            <% campground.reviews.forEach(review=> { %>
+                                <div class="card my-3 border-0 shadow-sm">
+                                    <div class="card-body"
+                                        style="background: linear-gradient(120deg, #f9f9f9, #e6e6e6); border-radius: 8px;">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <% for (let i=1; i <=5; i++) { %>
+                                                    <i
+                                                        class="fas fa-star <% if (i <= review.rating) { %>text-warning<% } else { %>text-muted<% } %>"></i>
+                                                    <% } %>
+                                            </div>
+                                            <% if (review.createdAt) { %>
+                                                <small class="text-muted">
+                                                    <%= review.createdAt.toLocaleDateString() %>
+                                                </small>
+                                                <% } %>
+                                        </div>
+                                        <p class="mt-2 mb-0">
+                                            <%= review.body %>
+                                        </p>
+
+                                        <!-- Delete Review Form -->
+                                        <form
+                                            action="/campgrounds/<%= campground._id %>/reviews/<%= review._id %>?_method=DELETE"
+                                            method="post" class="d-inline float-end">
+                                            <button type="submit" class="btn btn-link p-0 text-dark"
+                                                title="Delete Review">
+                                                <i class="fas fa-trash-alt"></i> <!-- Black delete icon -->
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <% }); %>
+                                    <% } %>
+                </div>
+
             </div>
         </div>
     </div>
-</div>
